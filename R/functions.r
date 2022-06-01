@@ -228,36 +228,6 @@ GPASDiscrimination <- function(resp.train,preds.train,resp.test=NULL, preds.test
 	}	
 }	
 
-launchScheduleEditor <- function(saveTo="schedule.freak",load=NULL){
-	if (.jcall("freak/rinterface/control/RFreak","Z", "isStartable")) { 		
-		if ((!is.null(Sys.info())) && (Sys.info()[1]=="Darwin")) {
-			if (is.null(load)) load<-"NULL"
-			system(paste("java -jar ",system.file("java", "RFrEAK-0.2-8.jar", package = "RFreak")," --edit-schedule='",load,"' --save-edited-schedule='",saveTo,"'",sep=""))
-		} else {
-			.jcall("freak/gui/scheduleeditor/ScheduleEditor", "V", "setRSaveTo",as.character(saveTo));
-			if (is.null(load)) {
-			 	.jcall("freak/rinterface/control/RFreak", "V", "showScheduleEditor");	
-			 } else {
-			 	.jcall("freak/rinterface/control/RFreak", "V", "showScheduleEditor",as.character(load));		 
-			 }
-		}
-	} else {
-		cat("\nRFreak does not work with Java HotSpot(TM) Server VM at the moment.\n")
-	}	
-}
-
-executeSchedule <- function(freakfile="schedule.freak"){
-	if (.jcall("freak/rinterface/control/RFreak","Z", "isStartable")) { 		
-		.jcall("freak/rinterface/control/LogRegInterface", "V", "setScheduleWillBeSetByR",as.logical(FALSE));  
-		cmdargs = .jarray(c(freakfile));
-		.jcall("freak/rinterface/control/RFreak","V", "rMain", cmdargs);
-		returnedFrame<-	.extractDataFrame(.jcall("freak/rinterface/model/RReturns", "Lfreak/rinterface/model/SDataFrame;", "getDataFrame"))
-		return(new("FreakReturn",summary=returnedFrame))	
-	} else {
-		cat("\nRFreak does not work with Java HotSpot(TM) Server VM at the moment.\n")
-	}	
-}
-
 .testInt<-function() {
 	set.seed(42);
 	resp = sample(rep(0:1,e=5));
