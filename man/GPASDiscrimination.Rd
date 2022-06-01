@@ -35,8 +35,9 @@ GPASDiscrimination(resp.train, preds.train, resp.test=NULL,
 # load example data
 data(data.logicfs)
 
-# execute GPAS to discriminate between cases and controls
-GPASDiscrimination(cl.logicfs,data.logicfs,runs=1,generations=1000)
+# execute GPAS to discriminate between cases and controls. 
+# NOTE: generations need to be higher in real applications.
+GPASDiscrimination(cl.logicfs,data.logicfs,runs=1,generations=10)
 }
 \keyword{tree}
 \keyword{interface}

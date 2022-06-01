@@ -39,7 +39,8 @@ GraphViz: \url{http://www.graphviz.org/}
 data(data.logicfs)
 
 # execute GPAS to search for interesting interactions
-GPASInteractions(cl.logicfs,data.logicfs,runs=1,generations=1000)
+# NOTE: generations need to be higher in real applications.
+GPASInteractions(cl.logicfs,data.logicfs,runs=1,generations=10)
 
 # delete GraphViz file if it is not needed
 unlink("interactions.dot")

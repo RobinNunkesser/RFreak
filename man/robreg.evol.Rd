@@ -62,10 +62,11 @@ The function \code{robreg.evol} returns an object of class "evolreg". This objec
 # load example data
 data(stackloss)
 
-# compute different regressions
-robreg.evol(stackloss[, 1:3], stackloss[, 4], method= "lts", generations=1000)
-lqsreg.evol(stackloss[, 1:3], stackloss[, 4], generations=1000)
-lqdreg.evol(stackloss[, 1:3], stackloss[, 4], generations=1000)
+# compute different regressions. 
+# NOTE: generations need to be higher in real applications.
+robreg.evol(stackloss[, 1:3], stackloss[, 4], method= "lts", generations=10)
+lqsreg.evol(stackloss[, 1:3], stackloss[, 4], generations=10)
+lqdreg.evol(stackloss[, 1:3], stackloss[, 4], generations=10)
 }
 \keyword{robust}
 \keyword{interface}

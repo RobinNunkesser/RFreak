@@ -104,10 +104,9 @@ robreg.evol <- function(x,y,method=c("lts","lta","lms","lqs","lqd"), quantile=NU
 		dataDim <- .jarray(dim(matrix));
 		dataObject <- .jnew("freak/rinterface/model/RDoubleMatrix",data,dataDim);	
 		if (is.null(quantile)) quantile=floor((sum(dim(matrix))+1)/2.0)
-		schedule<-.jcall("freak/rinterface/model/ScheduleConfigurator","Lfreak/core/control/Schedule;","getLTSSchedule",dataObject,as.integer(quantile),as.logical(adjust),as.integer(runs),as.integer(generations),as.integer(duration),method);
+		schedule<-.jcall("freak/rinterface/model/ScheduleConfigurator","Lfreak/core/control/ScheduleInterface;","getLTSSchedule",dataObject,as.integer(quantile),as.logical(adjust),as.integer(runs),as.integer(generations),as.integer(duration),method);
 		.jcall("freak/rinterface/control/LogRegInterface","V","rSetSchedule",schedule);
-		cmdargs = .jarray(c(""));
-		.jcall("freak/rinterface/control/RFreak","V", "rMain", cmdargs);
+		.jcall("freak/rinterface/control/RFreak","V", "rMain");
 		returnedFrame<-	.extractDataFrame(.jcall("freak/rinterface/model/RReturns", "Lfreak/rinterface/model/SDataFrame;", "getDataFrame"))
 		crit<-.jcall("freak/rinterface/model/RReturns", "D", "getResidual");
 		coefficients<-.jcall("freak/rinterface/model/RReturns", "[D", "getFittedHyperplane");
@@ -177,10 +176,9 @@ GPASInteractions <- function(resp,preds,runs=1,generations=10000,savegraph = "in
 		.jcall("freak/module/searchspace/logictree/Data", "V", "setRData", trainingDataObject);
 		.jcall("freak/module/searchspace/logictree/Data", "V", "setRMode");	   		
 		.jcall("freak/rinterface/model/ScheduleConfigurator","V","setInteractionR",as.integer(runs),as.integer(generations),as.character(savegraph),as.integer(occurences),ratio);		
-		schedule <- .jcall("freak/rinterface/model/ScheduleConfigurator","Lfreak/core/control/Schedule;","getCurrentSchedule");
+		schedule <- .jcall("freak/rinterface/model/ScheduleConfigurator","Lfreak/core/control/ScheduleInterface;","getCurrentSchedule");
 		.jcall("freak/rinterface/control/LogRegInterface","V","rSetSchedule",schedule);
-		cmdargs = .jarray(c(""));
-		.jcall("freak/rinterface/control/RFreak","V", "rMain", cmdargs);
+		.jcall("freak/rinterface/control/RFreak","V", "rMain");
 		returnedFrame<-	.extractDataFrame(.jcall("freak/rinterface/model/RReturns", "Lfreak/rinterface/model/SDataFrame;", "getDataFrame"))	
 		returnedTrees<-.jcall("freak/rinterface/model/RReturns", "[Lfreak/module/searchspace/logictree/DNFTree;", "getAllTrees")
 		.jcall("freak/module/searchspace/logictree/Data", "V", "clear");		
@@ -215,10 +213,9 @@ GPASDiscrimination <- function(resp.train,preds.train,resp.test=NULL, preds.test
 		.jcall("freak/module/searchspace/logictree/Data", "V", "setRData", trainingDataObject);	
 		.jcall("freak/module/searchspace/logictree/Data", "V", "setRMode");	 				
 		.jcall("freak/rinterface/model/ScheduleConfigurator","V","setDiscriminationR",as.integer(runs),as.integer(generations));
-		schedule <- .jcall("freak/rinterface/model/ScheduleConfigurator","Lfreak/core/control/Schedule;","getCurrentSchedule");
+		schedule <- .jcall("freak/rinterface/model/ScheduleConfigurator","Lfreak/core/control/ScheduleInterface;","getCurrentSchedule");
 		.jcall("freak/rinterface/control/LogRegInterface","V","rSetSchedule",schedule);
-		cmdargs = .jarray(c(""));
-		.jcall("freak/rinterface/control/RFreak","V", "rMain", cmdargs);
+		.jcall("freak/rinterface/control/RFreak","V", "rMain");
 		returnedFrame<-	.extractDataFrame(.jcall("freak/rinterface/model/RReturns", "Lfreak/rinterface/model/SDataFrame;", "getDataFrame"))
 		returnedTrees<-.jcall("freak/rinterface/model/RReturns", "[Lfreak/module/searchspace/logictree/DNFTree;", "getAllTrees")
 		.jcall("freak/module/searchspace/logictree/Data", "V", "clear");		
