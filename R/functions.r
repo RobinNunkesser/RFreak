@@ -228,29 +228,29 @@ GPASDiscrimination <- function(resp.train,preds.train,resp.test=NULL, preds.test
 	}	
 }	
 
-.testInt<-function() {
-	set.seed(42);
-	resp = sample(rep(0:1,e=5));
-	bin = matrix(sample(rep(0:2,e=34))[1:100],10,10);
-	runs = 1;
-	generations = 1000;
-	ret<-GPASInteractions(resp,bin,runs,generations,"test.dot")
-	print(ret)
-	return(ret)	
-}
+# .testInt<-function() {
+# 	set.seed(42);
+# 	resp = sample(rep(0:1,e=5));
+# 	bin = matrix(sample(rep(0:2,e=34))[1:100],10,10);
+# 	runs = 1;
+# 	generations = 1000;
+# 	ret<-GPASInteractions(resp,bin,runs,generations,"test.dot")
+# 	print(ret)
+# 	return(ret)	
+# }
 	
-.testDis<-function() {
-	set.seed(42);
-	resp = sample(rep(0:1,e=5));
-	bin = matrix(sample(rep(0:2,e=34))[1:100],10,10);
-	resp1 = sample(rep(0:1,e=5));
-	bin1 = matrix(sample(rep(0:2,e=34))[1:100],10,10);
-	runs = 1;
-	generations = 10000;
-	ret<-GPASDiscrimination(resp,bin,NULL,NULL,runs,generations)
-	print(ret)
-	return(ret)
-}
+# .testDis<-function() {
+# 	set.seed(42);
+# 	resp = sample(rep(0:1,e=5));
+# 	bin = matrix(sample(rep(0:2,e=34))[1:100],10,10);
+# 	resp1 = sample(rep(0:1,e=5));
+# 	bin1 = matrix(sample(rep(0:2,e=34))[1:100],10,10);
+# 	runs = 1;
+# 	generations = 10000;
+# 	ret<-GPASDiscrimination(resp,bin,NULL,NULL,runs,generations)
+# 	print(ret)
+# 	return(ret)
+# }
 
 #.testLTS<-function() {
 #	bin <- as.matrix(stackloss[, 1:3])

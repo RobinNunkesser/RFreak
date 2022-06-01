@@ -40,6 +40,9 @@ data(data.logicfs)
 
 # execute GPAS to search for interesting interactions
 GPASInteractions(cl.logicfs,data.logicfs,runs=1,generations=1000)
+
+# delete GraphViz file if it is not needed
+unlink("interactions.dot")
 }
 \keyword{tree}
 \keyword{interface}
